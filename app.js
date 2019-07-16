@@ -69,6 +69,7 @@ app.get('/tag/:tag', async function(req, res, next) {
       result.token = arr[i].id;
       result.url = arr[i].image;
       result.tag = _hashtag;
+      result.username = arr[i].owner.username;
       result.timestamp = arr[i].timestamp;
       await result.save();
     }

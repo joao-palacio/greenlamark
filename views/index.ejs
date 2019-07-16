@@ -70,13 +70,17 @@
               $('#grid').append(
                 '<div class="item bordergreen" ><img class="gallery__img" src="' +
                   val.url +
-                  '" /></div>'
+                  '" /><p  class="p">@' +
+                  val.username +
+                  '</p></div>'
               );
             } else {
               $('#grid').append(
                 '<div class="item"><img class="gallery__img" src="' +
                   val.url +
-                  '" /></div>'
+                  '" /><p  class="p">@' +
+                  val.username +
+                  '</p></div>'
               );
             }
           });
@@ -89,13 +93,17 @@
                 $('#grid').append(
                   '<div class="item bordergreen" ><img class="gallery__img" src="' +
                     val.url +
-                    '" /></div>'
+                    '" /><p  class="p">@' +
+                    val.username +
+                    '</p></div>'
                 );
               } else {
                 $('#grid').append(
                   '<div class="item"><img class="gallery__img" src="' +
                     val.url +
-                    '" /></div>'
+                    '" /><p class="p">@' +
+                    val.username +
+                    '</p></div>'
                 );
               }
             });
@@ -114,6 +122,20 @@
       }
       .bordergreen {
         border: 10px solid green;
+      }
+      .item {
+        position: relative;
+      }
+      .p {
+        position: absolute;
+        bottom: 0;
+        font-size: 17px;
+        z-index: 999;
+        width: 100%;
+        color: white;
+        text-align: center;
+        margin: 0;
+        background: rgba(0, 0, 0, 0.3);
       }
       .masonry {
         display: grid;

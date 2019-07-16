@@ -10,6 +10,9 @@ var InstaSchema = new mongoose.Schema({
   url: {
     type: String
   },
+  username: {
+    type: String
+  },
   tag: {
     type: String
   }
