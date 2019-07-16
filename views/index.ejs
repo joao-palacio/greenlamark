@@ -68,7 +68,7 @@
           $.each(response.data, function(key, val) {
             if (val.tag === 'doeiprogreen') {
               $('#grid').append(
-                '<div class="item" style="border:4px solid green"><img class="gallery__img" src="' +
+                '<div class="item bordergreen" ><img class="gallery__img" src="' +
                   val.url +
                   '" /></div>'
               );
@@ -87,7 +87,7 @@
             $.each(response.data, function(key, val) {
               if (val.tag === 'doeiprogreen') {
                 $('#grid').append(
-                  '<div class="item" style="border:4px solid green"><img class="gallery__img" src="' +
+                  '<div class="item bordergreen" ><img class="gallery__img" src="' +
                     val.url +
                     '" /></div>'
                 );
@@ -111,6 +111,9 @@
       .gridMax {
         max-height: 1080px;
         overflow: hidden;
+      }
+      .bordergreen {
+        border: 10px solid green;
       }
       .masonry {
         display: grid;
