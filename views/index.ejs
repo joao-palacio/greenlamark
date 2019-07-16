@@ -66,12 +66,19 @@
         axios.get('/lista').then(function(response) {
           $('#grid').empty();
           $.each(response.data, function(key, val) {
-            console.log(val);
-            $('#grid').prepend(
-              '<div class="item"><img class="gallery__img" src="' +
-                val.url +
-                '" /></div>'
-            );
+            if (val.tag === 'doeiprogreen') {
+              $('#grid').append(
+                '<div class="item" style="border:4px solid green"><img class="gallery__img" src="' +
+                  val.url +
+                  '" /></div>'
+              );
+            } else {
+              $('#grid').append(
+                '<div class="item"><img class="gallery__img" src="' +
+                  val.url +
+                  '" /></div>'
+              );
+            }
           });
         });
         setInterval(function() {
@@ -79,7 +86,7 @@
             $('#grid').empty();
             $.each(response.data, function(key, val) {
               console.log(val);
-              $('#grid').prepend(
+              $('#grid').append(
                 '<div class="item"><img class="gallery__img" src="' +
                   val.url +
                   '" /></div>'
@@ -90,6 +97,14 @@
       });
     </script>
     <style>
+      body {
+        max-height: 1080px;
+        overflow: hidden;
+      }
+      .gridMax {
+        max-height: 1080px;
+        overflow: hidden;
+      }
       .masonry {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
