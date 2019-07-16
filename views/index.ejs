@@ -63,7 +63,7 @@
             $('#grid').masonry();
           }, 0);
         };
-        axios.get('http://localhost:3000/lista').then(function(response) {
+        axios.get('/lista').then(function(response) {
           $('#grid').empty();
           $.each(response.data, function(key, val) {
             console.log(val);
@@ -75,7 +75,7 @@
           });
         });
         setInterval(function() {
-          axios.get('http://localhost:3000/lista').then(function(response) {
+          axios.get('/lista').then(function(response) {
             $('#grid').empty();
             $.each(response.data, function(key, val) {
               console.log(val);
