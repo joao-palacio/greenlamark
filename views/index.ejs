@@ -47,33 +47,21 @@
       integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
       crossorigin="anonymous"
     ></script>
-    <script src =  
-        "https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js" > 
-        </script> 
-    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js"></script>
 
     <script>
       $(function() {
-       
-        function ajax(){
+        function ajax() {
           axios.get('/lista').then(function(response) {
-          $.each($(".item"), function(key, val) {
-            $(this).removeClass('fadeIn');            
-            let self = $(this)
-            let time = Math.floor(Math.random() * 3000)
-            setTimeout(function(){
-              self.addClass('fadeOut');
-              setTimeout(function(){
-                self.remove()
-              },10000)
-            },time)
-          });
+            $.each($('.item'), function(key, val) {
+              $(this).removeClass('fadeIn');
+              let self = $(this);
+              self.addClass('fadeOut').remove();
+            });
 
-          
-          let json = _.shuffle(_.shuffle(response.data));
-          $.each(json, function(key, val) {
-            let time = Math.floor(Math.random() * 3000)
-            setTimeout(function(){            
+            let json = _.shuffle(_.shuffle(response.data));
+            $.each(json, function(key, val) {
+              let time = Math.floor(Math.random() * 3000);
               if (val.tag === 'doeiprogreen') {
                 $('#grid').prepend(
                   '<div class="item bordergreen animated  fadeIn" ><img class="gallery__img" src="' +
@@ -91,47 +79,62 @@
                     '</p></div>'
                 );
               }
-            },time)
+            });
           });
-        });
         }
         ajax();
-        setInterval(function() {          
-          ajax()
+        setInterval(function() {
+          ajax();
         }, 15000);
       });
     </script>
     <style>
       .animated {
-          -webkit-animation-duration: 2s;
-          animation-duration: 2s;
-          -webkit-animation-fill-mode: both;
-          animation-fill-mode: both;
+        -webkit-animation-duration: 2s;
+        animation-duration: 2s;
+        -webkit-animation-fill-mode: both;
+        animation-fill-mode: both;
       }
 
       @-webkit-keyframes fadeIn {
-          0% {opacity: 0;}
-          100% {opacity: 1;}
+        0% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
       }
       @keyframes fadeIn {
-          0% {opacity: 0;}
-          100% {opacity: 1;}
+        0% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
       }
       .fadeIn {
-          -webkit-animation-name: fadeIn;
-          animation-name: fadeIn;
+        -webkit-animation-name: fadeIn;
+        animation-name: fadeIn;
       }
       @-webkit-keyframes fadeOut {
-          0% {opacity: 1;}
-          100% {opacity: 0;}
+        0% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 0;
+        }
       }
-      @keyframes fadeOut{
-          0% {opacity: 1;}
-          100% {opacity: 0;}
+      @keyframes fadeOut {
+        0% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 0;
+        }
       }
       .fadeOut {
-          -webkit-animation-name: fadeOut;
-          animation-name: fadeOut;
+        -webkit-animation-name: fadeOut;
+        animation-name: fadeOut;
       }
 
       body {
