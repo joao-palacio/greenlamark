@@ -47,51 +47,36 @@
       integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
       crossorigin="anonymous"
     ></script>
-    <script src="https://unpkg.com/masonry-layout@4.2.2/dist/masonry.pkgd.min.js"></script>
+    <script src =  
+        "https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js" > 
+        </script> 
+    
 
     <script>
       $(function() {
-        console.log('ready!');
-        $('#grid').masonry({
-          // options
-          itemSelector: '.grid-item',
-          percentPosition: true,
-          columnWidth: 260
-        });
-        var masonryUpdate = function() {
-          setTimeout(function() {
-            $('#grid').masonry();
-          }, 0);
-        };
-        axios.get('/lista').then(function(response) {
-          $('#grid').empty();
-          $.each(response.data, function(key, val) {
-            if (val.tag === 'doeiprogreen') {
-              $('#grid').append(
-                '<div class="item bordergreen" ><img class="gallery__img" src="' +
-                  val.url +
-                  '" /><p  class="p">@' +
-                  val.username +
-                  '</p></div>'
-              );
-            } else {
-              $('#grid').append(
-                '<div class="item"><img class="gallery__img" src="' +
-                  val.url +
-                  '" /><p  class="p">@' +
-                  val.username +
-                  '</p></div>'
-              );
-            }
-          });
-        });
-        setInterval(function() {
+       
+        function ajax(){
           axios.get('/lista').then(function(response) {
-            $('#grid').empty();
-            $.each(response.data, function(key, val) {
+          $.each($(".item"), function(key, val) {
+            $(this).removeClass('fadeIn');            
+            let self = $(this)
+            let time = Math.floor(Math.random() * 500)
+            setTimeout(function(){
+              self.addClass('fadeOut');
+              setTimeout(() => {
+                self.remove()
+              },200)
+            },time)
+          });
+
+          
+          let json = _.shuffle(_.shuffle(response.data));
+          $.each(json, function(key, val) {
+            let time = Math.floor(Math.random() * 1000)
+            setTimeout(function(){            
               if (val.tag === 'doeiprogreen') {
                 $('#grid').append(
-                  '<div class="item bordergreen" ><img class="gallery__img" src="' +
+                  '<div class="item bordergreen animated fadeIn" ><img class="gallery__img" src="' +
                     val.url +
                     '" /><p  class="p">@' +
                     val.username +
@@ -99,19 +84,56 @@
                 );
               } else {
                 $('#grid').append(
-                  '<div class="item"><img class="gallery__img" src="' +
+                  '<div class="item animated fadeIn"><img class="gallery__img" src="' +
                     val.url +
-                    '" /><p class="p">@' +
+                    '" /><p  class="p">@' +
                     val.username +
                     '</p></div>'
                 );
               }
-            });
+            },time)
           });
-        }, 6000);
+        });
+        }
+        ajax();
+        setInterval(function() {          
+          ajax()
+        }, 8000);
       });
     </script>
     <style>
+      .animated {
+          -webkit-animation-duration: 1s;
+          animation-duration: 1s;
+          -webkit-animation-fill-mode: both;
+          animation-fill-mode: both;
+      }
+
+      @-webkit-keyframes fadeIn {
+          0% {opacity: 0;}
+          100% {opacity: 1;}
+      }
+      @keyframes fadeIn {
+          0% {opacity: 0;}
+          100% {opacity: 1;}
+      }
+      .fadeIn {
+          -webkit-animation-name: fadeIn;
+          animation-name: fadeIn;
+      }
+      @-webkit-keyframes fadeOut {
+          0% {opacity: 1;}
+          100% {opacity: 0;}
+      }
+      @keyframes fadeOut{
+          0% {opacity: 1;}
+          100% {opacity: 0;}
+      }
+      .fadeOut {
+          -webkit-animation-name: fadeOut;
+          animation-name: fadeOut;
+      }
+
       body {
         max-height: 1080px;
         overflow: hidden;

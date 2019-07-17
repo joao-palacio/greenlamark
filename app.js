@@ -1,21 +1,15 @@
 const express = require('express');
-const path = require('path');
 const bodyParser = require('body-parser');
-const http = require('http');
 const defaults = require('./config/defaults');
-const index = require('./routes/index');
 const instagram = require('./routes/util/instagram');
 const db = require('./config/mongoose');
 const app = express();
 const InstaModel = require('./models/Insta');
-const _ = require('underscore');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(express.static(__dirname + '/static'));
-
-const MongoClient = require('mongodb').MongoClient;
 
 const uri =
   'mongodb+srv://dbuser:dbpassword@cluster0-gmvnt.mongodb.net/test?retryWrites=true&w=majority';
@@ -43,7 +37,7 @@ app.get('/lista', async (req, res) => {
   } catch (error) {
     console.error(`FATAL`, JSON.stringify(error, null, 2));
   }
-  var find = await InstaModel.find().sort({ _id: -1 });
+  var find = await InstaModel.find().sort({ _id: -1 }).limit(20);
   res.json(find);
 });
 
